@@ -1,2 +1,5 @@
 ﻿  main.cpp
-  ProjektBazaPracownikowV2.vcxproj -> C:\Users\maksy\Desktop\ProjektBazaPracownikowV2\x64\Debug\ProjektBazaPracownikowV2.exe
+C:\Users\maksy\Desktop\ProjektBazaPracownikowV2\ProjektBazaPracownikowV2\Czlowiek.h(28,1): error C2027: use of undefined type 'VectorOperator'
+C:\Users\maksy\Desktop\ProjektBazaPracownikowV2\ProjektBazaPracownikowV2\Czlowiek.h(8,15): message : see declaration of 'VectorOperator'
+C:\Users\maksy\Desktop\ProjektBazaPracownikowV2\ProjektBazaPracownikowV2\Kierownik.h(20): error C2027: use of undefined type 'VectorOperator'
+C:\Users\maksy\Desktop\ProjektBazaPracownikowV2\ProjektBazaPracownikowV2\Czlowiek.h(8,15): message : see declaration of 'VectorOperator'

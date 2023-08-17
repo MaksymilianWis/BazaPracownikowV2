@@ -129,6 +129,13 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Czlowiek.h" />
+    <ClInclude Include="FileOperator.h" />
+    <ClInclude Include="Kierownik.h" />
+    <ClInclude Include="Szeregowy.h" />
+    <ClInclude Include="VectorOperator.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
