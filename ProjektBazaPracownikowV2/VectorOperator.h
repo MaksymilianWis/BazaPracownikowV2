@@ -2,40 +2,62 @@
 #include <vector>
 #include "Czlowiek.h"
 #include "Kierownik.h"
+#include "Szeregowy.h"
 #include <iostream>
 
 class VectorOperator
 {
 private:
-	std::vector<Czlowiek*> lista_kierownikow_;
+	std::vector<std::shared_ptr<Czlowiek>> lista_kierownikow_;
 
 public:
 	VectorOperator() {};
 	~VectorOperator() {};
 
-	bool wyszukiwaniePracownika(int id)//1 = znaleziony zwraca wskaznik na pracownika
+	std::shared_ptr<Czlowiek> wyszukiwaniePracownika(int id)//1 = znaleziony zwraca wskaznik na pracownika
 	{
 		for (auto i : this->lista_kierownikow_)
 		{
 			if (i->id_ == id) return i;
 		}
-		std::cout << "Nieznaleziono pracownika: " << id;
+		//std::cout << "Nieznaleziono istniejacego juz pracownika w bazie: " << id << std::endl;
 		return 0;
 	}
 
 	
-	bool dodajDoListyKierownikow() //1 = dodano kierownika pomyslnie
+	bool DodajPracownika(char x) //1 = dodano kierownika pomyslnie x = 'k' Kierownik, x = 's' szeregowy
 	{
-		Czlowiek* kierownik = new Kierownik;
-
-		lista_kierownikow_.push_back(kierownik);
-		if (!this->wyszukiwaniePracownika(kierownik->id_))
+		switch(x)
 		{
-			std::cout << "Nie udalo sie dodac kierownika." << std::endl;
-			return 0;
+		case 'k':
+		{
+			//TWORZENIE KIEROWNIKA
+			std::shared_ptr<Czlowiek> c1 = std::make_shared<Kierownik>();
+			do {
+				c1->dodajDanePracownika();
+			} while (this->wyszukiwaniePracownika(c1->id_));
+			
+			lista_kierownikow_.push_back(c1);
 		}
-		std::cout << "Pomyslnie dodano kierownika";
+			break;
+
+		case 's':
+		{
+			//std::shared_ptr<Czlowiek> s1 = std::make_shared<Szeregowy>();
+		}
+			break;
+		default:
+			break;
+		}
 		return 1;
+	}
+
+	virtual void wyswietlWszystkichPracownikow()
+	{
+		for (auto i : lista_kierownikow_)
+		{
+			i->wyswietlJednegoPracownika();
+		}
 	}
 
 };

@@ -17,17 +17,12 @@ public:
 	Czlowiek() : id_(0), imie_("0"), nazwisko_("0"), data_urodzenia_("00;00;0000"), wynagrodzenie_(0) {};
 	~Czlowiek() = default;
 
-	bool dodajCzlowieka(VectorOperator& vOperator)
+	bool dodajDaneCzlowieka()
 	{
-		int temp_id;
-		do
-		{
-			std::cout << "Podaj id: ";
-			std::cin >> temp_id;
-			std::cout << std::endl;
-		} while (vOperator.wyszukiwaniePracownika(temp_id));
+		std::cout << "Podaj id: ";
+		std::cin >> this->id_;
 
-		std::cout << "Podaj imie: ";
+		std::cout << "\nPodaj imie: ";
 		std::cin >> this->imie_;
 		std::cout << "\nPodaj nazwisko: ";
 		std::cin >> this->nazwisko_;
@@ -38,10 +33,17 @@ public:
 
 		return 1;
 	}
+	void wyswietlJednegoCzlowieka()
+	{
+		std::cout << "numer id: " << this->id_ << "\n";
+		std::cout << "imie i nazwisko: " << this->imie_ << " " << this->nazwisko_ << "\n";
+		std::cout << "wynagrodzenie: " << this->wynagrodzenie_ << "\n";
+	}
 
-	virtual bool dodajPracownika(VectorOperator& vOperator) = 0;
-
+	virtual bool dodajDanePracownika() = 0;
 	virtual bool usuwaniePracownika() = 0;
+	virtual void wyswietlJednegoPracownika() = 0;
+
 	
 };
 
