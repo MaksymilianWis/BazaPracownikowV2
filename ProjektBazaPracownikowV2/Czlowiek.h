@@ -17,6 +17,24 @@ public:
 	Czlowiek() : id_(0), imie_("0"), nazwisko_("0"), data_urodzenia_("00;00;0000"), wynagrodzenie_(0) {};
 	~Czlowiek() = default;
 
+	virtual bool debugDodajDanePracownika(int id) = 0;
+	bool debugDodajDaneCzlowieka(int id)
+	{
+		std::cout << "Podaj id: AUTO";
+		this->id_ = id;
+
+		std::cout << "\nPodaj imie: AUTO";
+		this->imie_ = "imie";
+		std::cout << "\nPodaj nazwisko: AUTO";
+		this->nazwisko_ = "nazwisko";
+		std::cout << "\nPodaj date (dd;mm;yyyy): AUTO";
+		this->data_urodzenia_ = "00;00;0000";
+		std::cout << "\nPodaj wysokosc wynagrodzenia: AUTO";
+		this->wynagrodzenie_ = 0;
+
+		return 1;
+	}
+
 	bool dodajDaneCzlowieka()
 	{
 		std::cout << "Podaj id: ";
@@ -48,11 +66,12 @@ public:
 };
 
 /*
+debugDodawanie X
 USUWANIE
-DODAWANIE
+DODAWANIE X
 WYSZUKIWANIE X
 ZMIANA DANYCH
 SORTOWANIE PO WIEKU
-DRUKOWANIE NA EKRAN
+DRUKOWANIE NA EKRAN X
 DRUKOWANIE DO PLIKU
 */

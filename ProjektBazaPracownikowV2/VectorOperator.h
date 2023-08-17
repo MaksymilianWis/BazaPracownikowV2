@@ -24,8 +24,34 @@ public:
 		return 0;
 	}
 
+	bool debugDodajPracownika(char x, int id) //1 = dodano kierownika pomyslnie x = 'k' Kierownik, x = 's' szeregowy
+	{
+		switch (x)
+		{
+		case 'k':
+		{
+			//TWORZENIE KIEROWNIKA
+			std::shared_ptr<Czlowiek> c1 = std::make_shared<Kierownik>();
+			do {
+				c1->debugDodajDanePracownika(id);
+			} while (this->wyszukiwaniePracownika(c1->id_));
+
+			lista_kierownikow_.push_back(c1);
+		}
+		break;
+
+		case 's':
+		{
+			//std::shared_ptr<Czlowiek> s1 = std::make_shared<Szeregowy>();
+		}
+		break;
+		default:
+			break;
+		}
+		return 1;
+	}
 	
-	bool DodajPracownika(char x) //1 = dodano kierownika pomyslnie x = 'k' Kierownik, x = 's' szeregowy
+	bool dodajPracownika(char x) //1 = dodano kierownika pomyslnie x = 'k' Kierownik, x = 's' szeregowy
 	{
 		switch(x)
 		{
