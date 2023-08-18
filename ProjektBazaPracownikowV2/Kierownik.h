@@ -19,7 +19,6 @@ public:
 
 		return 1;
 	}
-
 	virtual bool dodajDanePracownika()
 	{
 		this->dodajDaneCzlowieka();
@@ -28,6 +27,24 @@ public:
 
 		return 1;
 	}
+	virtual void wyswietlJednegoPracownika() 
+	{
+		this->wyswietlJednegoCzlowieka();
+		std::cout << "liczba podpracownikow: " << this->liczba_podpracownikow_ << "\n";
+		this->wyswietlWszystkichPodpracownikow();
+	}
+	virtual void skopiujWszystkichPodpracownikow()
+	{
+		for (auto i : this->lista_podpracownikow_) //DODAJ OPERATOR VECTOR + VECTOR
+		{
+			this->dodajPodpracownika(i);
+		}
+	}
+	virtual void dodajPodpracownika(std::shared_ptr<Czlowiek> Czlowiek)
+	{
+		this->lista_podpracownikow_.push_back(Czlowiek);
+	}
+
 	void wyswietlWszystkichPodpracownikow()
 	{
 		for (auto i : lista_podpracownikow_)
@@ -35,14 +52,7 @@ public:
 			i->wyswietlJednegoCzlowieka();
 		}
 	}
-
-	virtual bool usuwaniePracownika() { return 0; };
-	virtual void wyswietlJednegoPracownika() 
-	{
-		this->wyswietlJednegoCzlowieka();
-		std::cout << "liczba podpracownikow: " << this->liczba_podpracownikow_ << "\n";
-		this->wyswietlWszystkichPodpracownikow();
-	}
+	
 	
 
 };

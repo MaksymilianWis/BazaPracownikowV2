@@ -77,6 +77,30 @@ public:
 		}
 		return 1;
 	}
+	bool usuwaniePracownika(int id_kierownika_do_usuniecia) 
+	{
+		int id_nowy_kierownik;
+		std::shared_ptr<Czlowiek> it_kierownik_do_usuniecia = this->wyszukiwaniePracownika(id_kierownika_do_usuniecia);
+
+		do
+		{
+			std::cout << "Podaj id kierownia do przepisania listy podpracownikow: ";
+			std::cin >> id_nowy_kierownik;
+		} while (!this->wyszukiwaniePracownika(id_nowy_kierownik) or id_nowy_kierownik == id_kierownika_do_usuniecia);
+		std::shared_ptr<Czlowiek> it_nowy_kierownik = this->wyszukiwaniePracownika(id_nowy_kierownik);
+
+		it_nowy_kierownik->skopiujWszystkichPodpracownikow();
+		
+		auto it = std::remove(lista_kierownikow_.begin(), lista_kierownikow_.end(), it_kierownik_do_usuniecia);
+		lista_kierownikow_.erase(it, lista_kierownikow_.end());
+		std::cout << "usunieto pracownika o id: " << id_kierownika_do_usuniecia << std::endl;
+		
+		if (!this->wyszukiwaniePracownika(id_kierownika_do_usuniecia))
+		{
+			return 0;
+		}
+		return 1;
+	}
 
 	virtual void wyswietlWszystkichPracownikow()
 	{
@@ -85,5 +109,6 @@ public:
 			i->wyswietlJednegoPracownika();
 		}
 	}
+
 
 };

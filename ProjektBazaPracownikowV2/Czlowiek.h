@@ -59,8 +59,9 @@ public:
 	}
 
 	virtual bool dodajDanePracownika() = 0;
-	virtual bool usuwaniePracownika() = 0;
 	virtual void wyswietlJednegoPracownika() = 0;
+	virtual void skopiujWszystkichPodpracownikow() = 0;
+	virtual void dodajPodpracownika(std::shared_ptr<Czlowiek> Czlowiek) = 0;
 
 	
 };

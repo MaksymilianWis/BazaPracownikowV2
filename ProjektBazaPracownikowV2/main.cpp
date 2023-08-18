@@ -13,4 +13,7 @@ int main()
 	c1->debugDodajPracownika('k', 3);
 	c1->debugDodajPracownika('k', 4);
 	c1->wyswietlWszystkichPracownikow();
+	c1->usuwaniePracownika(1);
+	std::cout << "-----------------------------------------" << std::endl;
+	c1->wyswietlWszystkichPracownikow();
 }
