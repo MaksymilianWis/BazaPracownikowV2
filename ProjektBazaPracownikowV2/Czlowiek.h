@@ -10,14 +10,16 @@ private:
 	int id_;
 	std::string imie_;
 	std::string nazwisko_;
-	std::string data_urodzenia_;
+	int data_urodzenia_;
 	float wynagrodzenie_;
 
 public:
-	Czlowiek() : id_(0), imie_("0"), nazwisko_("0"), data_urodzenia_("00;00;0000"), wynagrodzenie_(0) {};
+	Czlowiek() : id_(0), imie_("0"), nazwisko_("0"), data_urodzenia_(00000000), wynagrodzenie_(0) {};
+	Czlowiek(int id, int data) : id_(id), imie_("0"), nazwisko_("0"), data_urodzenia_(data), wynagrodzenie_(0) {};
 	~Czlowiek() = default;
 
 	virtual bool debugDodajDanePracownika(int id) = 0;
+	virtual bool debugDodajDanePracownika(int id, int data) = 0;
 	bool debugDodajDaneCzlowieka(int id)
 	{
 		std::cout << "Podaj id: AUTO";
@@ -27,8 +29,24 @@ public:
 		this->imie_ = "imie";
 		std::cout << "\nPodaj nazwisko: AUTO";
 		this->nazwisko_ = "nazwisko";
-		std::cout << "\nPodaj date (dd;mm;yyyy): AUTO";
-		this->data_urodzenia_ = "00;00;0000";
+		std::cout << "\nPodaj date (yyyymmdd): AUTO";
+		this->data_urodzenia_ = 00000000;
+		std::cout << "\nPodaj wysokosc wynagrodzenia: AUTO";
+		this->wynagrodzenie_ = 0;
+
+		return 1;
+	}
+	bool debug2DodajDaneCzlowieka(int id, int data)
+	{
+		std::cout << "Podaj id: AUTO";
+		this->id_ = id;
+
+		std::cout << "\nPodaj imie: AUTO";
+		this->imie_ = "imie";
+		std::cout << "\nPodaj nazwisko: AUTO";
+		this->nazwisko_ = "nazwisko";
+		std::cout << "\nPodaj date (yyyymmdd): AUTO";
+		this->data_urodzenia_ = data;
 		std::cout << "\nPodaj wysokosc wynagrodzenia: AUTO";
 		this->wynagrodzenie_ = 0;
 
@@ -44,7 +62,7 @@ public:
 		std::cin >> this->imie_;
 		std::cout << "\nPodaj nazwisko: ";
 		std::cin >> this->nazwisko_;
-		std::cout << "\nPodaj date (dd;mm;yyyy): ";
+		std::cout << "\nPodaj date (yyyymmdd): ";
 		std::cin >> this->data_urodzenia_;
 		std::cout << "\nPodaj wysokosc wynagrodzenia: ";
 		std::cin >> this->wynagrodzenie_;
@@ -55,6 +73,7 @@ public:
 	{
 		std::cout << "numer id: " << this->id_ << "\n";
 		std::cout << "imie i nazwisko: " << this->imie_ << " " << this->nazwisko_ << "\n";
+		std::cout << "data urodzenia : " << this->data_urodzenia_ << "\n";
 		std::cout << "wynagrodzenie: " << this->wynagrodzenie_ << "\n";
 	}
 
@@ -68,11 +87,11 @@ public:
 
 /*
 debugDodawanie X
-USUWANIE
+USUWANIE X
 DODAWANIE X
 WYSZUKIWANIE X
-ZMIANA DANYCH
-SORTOWANIE PO WIEKU
+ZMIANA DANYCH X
+SORTOWANIE PO WIEKU X
 DRUKOWANIE NA EKRAN X
 DRUKOWANIE DO PLIKU
 */

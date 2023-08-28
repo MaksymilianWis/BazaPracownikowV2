@@ -19,6 +19,14 @@ public:
 
 		return 1;
 	}
+	virtual bool debugDodajDanePracownika(int id, int data)
+	{
+		this->debug2DodajDaneCzlowieka(id, data);
+
+		std::cout << "Liczba podpracownikow domyslnie ustawiona na 0." << std::endl;
+
+		return 1;
+	}
 	virtual bool dodajDanePracownika()
 	{
 		this->dodajDaneCzlowieka();
@@ -44,6 +52,7 @@ public:
 	{
 		this->lista_podpracownikow_.push_back(Czlowiek);
 	}
+	
 
 	void wyswietlWszystkichPodpracownikow()
 	{

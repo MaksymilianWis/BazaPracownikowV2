@@ -3,12 +3,83 @@
 #include "Czlowiek.h"
 #include "Kierownik.h"
 #include "Szeregowy.h"
+#include "FileOperator.h"
 #include <iostream>
 
 class VectorOperator
 {
 private:
 	std::vector<std::shared_ptr<Czlowiek>> lista_kierownikow_;
+
+	template<typename T>
+	void itQuickSort(T poczatek, T koniec)// od najmlodszego
+	{
+		auto i = this->lista_kierownikow_.begin();
+
+		//i->swap;
+
+		auto p = poczatek, q = koniec;
+		auto pivot = poczatek;
+		std::advance(pivot, std::distance(p, q) / 2);
+
+		while (true)
+		{
+			while (p->get()->data_urodzenia_ < pivot->get()->data_urodzenia_)//szukanie wiekszego od pivot
+				p++;
+			while (q->get()->data_urodzenia_ > pivot->get()->data_urodzenia_)//szukanie mniejszego od pivot
+				q--;
+			if (std::distance(p, q)>0)
+			{
+				p->swap(*q);
+				std::cout << "========================================" << std::endl;
+				this->wyswietlWszystkichPracownikow();
+				std::cout << "========================================" << std::endl;
+			}
+			else
+			{
+				break;
+			}
+		}
+		if(std::distance(poczatek, q) > 1) 
+			itQuickSort(poczatek, q);
+
+		if (std::distance(p, koniec) > 1)
+		{
+			itQuickSort(p, koniec);
+		}
+	}
+	
+	void quickSort(int poczatek, int koniec)//NIE DZIALA
+	{
+		
+		int pivot = (this->lista_kierownikow_[(poczatek + koniec)/2]->data_urodzenia_);
+		int p = --poczatek, q = ++koniec; poczatek++; koniec--;
+		while (true)
+		{
+			
+
+			while (pivot > this->lista_kierownikow_[++p]->data_urodzenia_)
+				;
+			while (pivot < this->lista_kierownikow_[--q]->data_urodzenia_)
+				;
+			if (p <= q)
+			{
+				this->lista_kierownikow_[p].swap(this->lista_kierownikow_[q]);//zamienia miejscami w tablicy funkcja wbudowana w vector
+				std::cout << "========================================" << std::endl;
+				this->wyswietlWszystkichPracownikow();
+				std::cout << "========================================" << std::endl;
+			}
+			else
+			{
+				break;
+			}
+		}
+
+		if (q > poczatek)
+			this->quickSort(poczatek, q);
+		if (p < koniec)
+			this->quickSort(p, koniec);
+	}
 
 public:
 	VectorOperator() {};
@@ -23,7 +94,6 @@ public:
 		//std::cout << "Nieznaleziono istniejacego juz pracownika w bazie: " << id << std::endl;
 		return 0;
 	}
-
 	bool debugDodajPracownika(char x, int id) //1 = dodano kierownika pomyslnie x = 'k' Kierownik, x = 's' szeregowy
 	{
 		switch (x)
@@ -50,7 +120,32 @@ public:
 		}
 		return 1;
 	}
-	
+	bool debugDodajPracownika(char x, int id, int data) //1 = dodano kierownika pomyslnie x = 'k' Kierownik, x = 's' szeregowy
+	{
+		switch (x)
+		{
+		case 'k':
+		{
+			//TWORZENIE KIEROWNIKA
+			std::shared_ptr<Czlowiek> c1 = std::make_shared<Kierownik>();
+			do {
+				c1->debugDodajDanePracownika(id, data);
+			} while (this->wyszukiwaniePracownika(c1->id_));
+
+			lista_kierownikow_.push_back(c1);
+		}
+		break;
+
+		case 's':
+		{
+			//std::shared_ptr<Czlowiek> s1 = std::make_shared<Szeregowy>();
+		}
+		break;
+		default:
+			break;
+		}
+		return 1;
+	}
 	bool dodajPracownika(char x) //1 = dodano kierownika pomyslnie x = 'k' Kierownik, x = 's' szeregowy
 	{
 		switch(x)
@@ -101,14 +196,35 @@ public:
 		}
 		return 1;
 	}
-
-	virtual void wyswietlWszystkichPracownikow()
+	void wyswietlWszystkichPracownikow()
 	{
 		for (auto i : lista_kierownikow_)
 		{
 			i->wyswietlJednegoPracownika();
 		}
 	}
+	bool zmienDanePracownika(int id)
+	{
+		this->wyszukiwaniePracownika(id)->dodajDanePracownika();
+		if (!wyszukiwaniePracownika(id))
+		{
+			std::cout << "Nie udalo sie zmienic danych pracownika o id: " << id << std::endl;
+			return 0;
+		}
+		return 1;
+	}
+	void sortowaniePoWieku()
+	{
+		//this->quickSort(0, this->lista_kierownikow_.size());
+		this->itQuickSort(std::begin(this->lista_kierownikow_), std::prev(std::end(lista_kierownikow_), 1));
+	}
+	void drukujWszystkichDoPliku()
+	{
+		std::unique_ptr<FileOperator> fop = std::make_unique<FileOperator>();
+
+
+	}
+	
 
 
 };
