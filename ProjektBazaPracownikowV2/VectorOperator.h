@@ -221,9 +221,15 @@ public:
 	void drukujWszystkichDoPliku()
 	{
 		std::unique_ptr<FileOperator> fop = std::make_unique<FileOperator>();
+		
 
+		for (auto it : lista_kierownikow_)
+		{
+			fop->drukujJednegoDoPliku(it->zwrocDanePracownikaString());
+		}
 
 	}
+
 	
 
 

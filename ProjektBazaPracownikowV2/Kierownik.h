@@ -4,6 +4,7 @@
 
 class Kierownik : public Czlowiek
 {
+	friend class FileOperator;
 private:
 	int liczba_podpracownikow_;
 	std::vector<std::shared_ptr<Czlowiek>> lista_podpracownikow_;
@@ -51,6 +52,10 @@ public:
 	virtual void dodajPodpracownika(std::shared_ptr<Czlowiek> Czlowiek)
 	{
 		this->lista_podpracownikow_.push_back(Czlowiek);
+	}
+	virtual std::string zwrocDanePracownikaString()
+	{
+		return this->zwrocDaneCzlowiekaString() + ";" + std::to_string(this->liczba_podpracownikow_) + "\n";//dodaj drukowanie listy podpracownikow
 	}
 	
 

@@ -6,6 +6,7 @@
 class Czlowiek
 {
 	friend class VectorOperator;
+	friend class FileOperator;
 private:
 	int id_;
 	std::string imie_;
@@ -47,7 +48,7 @@ public:
 		this->nazwisko_ = "nazwisko";
 		std::cout << "\nPodaj date (yyyymmdd): AUTO";
 		this->data_urodzenia_ = data;
-		std::cout << "\nPodaj wysokosc wynagrodzenia: AUTO";
+		std::cout << "\nPodaj wysokosc wynagrodzenia: AUTO\n";
 		this->wynagrodzenie_ = 0;
 
 		return 1;
@@ -76,11 +77,18 @@ public:
 		std::cout << "data urodzenia : " << this->data_urodzenia_ << "\n";
 		std::cout << "wynagrodzenie: " << this->wynagrodzenie_ << "\n";
 	}
+	std::string zwrocDaneCzlowiekaString()
+	{
+		return std::to_string(this->id_) + ";" + this->imie_ + ";" + 
+				this->nazwisko_ + ";" + std::to_string(this->data_urodzenia_) + ";" +
+				std::to_string(this->wynagrodzenie_);
+	}
 
 	virtual bool dodajDanePracownika() = 0;
 	virtual void wyswietlJednegoPracownika() = 0;
 	virtual void skopiujWszystkichPodpracownikow() = 0;
 	virtual void dodajPodpracownika(std::shared_ptr<Czlowiek> Czlowiek) = 0;
+	virtual std::string zwrocDanePracownikaString() = 0;
 
 	
 };
@@ -93,5 +101,6 @@ WYSZUKIWANIE X
 ZMIANA DANYCH X
 SORTOWANIE PO WIEKU X
 DRUKOWANIE NA EKRAN X
-DRUKOWANIE DO PLIKU
+DRUKOWANIE DO PLIKU X
+DRUKOWANIE Z PLIKU DO WEKTORA 
 */
